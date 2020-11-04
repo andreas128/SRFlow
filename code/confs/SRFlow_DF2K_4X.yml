@@ -1,0 +1,63 @@
+#### general settings
+name: train
+use_tb_logger: true
+model: SRFlow
+distortion: sr
+scale: 4
+gpu_ids: [ 0 ]
+
+#### Test Settings
+dataroot_GT: ../datasets/div2k-validation-modcrop8-gt
+dataroot_LR: ../datasets/div2k-validation-modcrop8-x4
+model_path: ../trained_models/SRFlow_DF2K_4X.pth
+heat: 0.9 # This is the standard deviation of the latent vectors
+
+#### network structures
+network_G:
+  which_model_G: SRFlowNet
+  in_nc: 3
+  out_nc: 3
+  nf: 64
+  nb: 23
+  upscale: 4
+  train_RRDB: false
+  train_RRDB_delay: 0.5
+
+  flow:
+    K: 16
+    L: 3
+    noInitialInj: true
+    coupling: CondAffineSeparatedAndCond
+    additionalFlowNoAffine: 2
+    split:
+      enable: true
+    fea_up0: true
+    stackRRDB:
+      blocks: [ 1, 8, 15, 22 ]
+      concat: true
+
+#### training settings: learning rate scheme, loss
+train:
+  manual_seed: 10
+  lr_G: !!float 2.5e-4
+  weight_decay_G: 0
+  beta1: 0.9
+  beta2: 0.99
+  lr_scheme: MultiStepLR
+  warmup_iter: -1  # no warm up
+  lr_steps_rel: [ 0.5, 0.75, 0.9, 0.95 ]
+  lr_gamma: 0.5
+
+  niter: 200000
+  val_freq: 40000
+
+#### validation settings
+val:
+  heats: [ 0.0, 0.5, 0.75, 1.0 ]
+  n_sample: 3
+
+#### logger
+logger:
+  # Debug print_freq: 100
+  print_freq: 100
+  save_checkpoint_freq: !!float 1e3

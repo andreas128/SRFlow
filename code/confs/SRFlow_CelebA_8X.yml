@@ -1,0 +1,37 @@
+#### general settings
+name: train
+use_tb_logger: true
+model: SRFlow
+distortion: sr
+scale: 8
+gpu_ids: [ 0 ]
+
+#### Test Settings
+dataroot_GT: ../datasets/celebA-validation-gt
+dataroot_LR: ../datasets/celebA-validation-x8
+model_path: ../trained_models/SRFlow_CelebA_8X.pth
+heat: 0.9 # This is the standard deviation of the latent vectors
+
+#### network structures
+network_G:
+  which_model_G: SRFlowNet
+  in_nc: 3
+  out_nc: 3
+  nf: 64
+  nb: 8
+  upscale: 8
+  train_RRDB: false
+  train_RRDB_delay: 0.5
+
+  flow:
+    K: 16
+    L: 4
+    noInitialInj: true
+    coupling: CondAffineSeparatedAndCond
+    additionalFlowNoAffine: 2
+    split:
+      enable: true
+    fea_up0: true
+    stackRRDB:
+      blocks: [ 1, 3, 5, 7 ]
+      concat: true
