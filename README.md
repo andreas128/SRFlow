@@ -40,7 +40,7 @@ python test.py ./confs/SRFlow_DF2K_4X.yml      # Diverse Images 4X (Dataset Incl
 python test.py ./confs/SRFlow_DF2K_8X.yml      # Diverse Images 8X (Dataset Included)
 python test.py ./confs/SRFlow_CelebA_8X.yml    # Faces 8X
 ```
-
+For testing, we apply SRFlow to the full images on CPU.
 
 # Our paper explains
 
