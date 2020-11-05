@@ -127,7 +127,7 @@ class SRFlowModel(BaseModel):
             fac = 2 ** (L - 3)
             z_size = int(self.lr_size // (2 ** (L - 3)))
             z = torch.normal(mean=0, std=heat, size=(batch_size, 3 * 8 * 8 * fac * fac, z_size, z_size))
-        return z
+        return z.to(self.device)
 
     def get_current_log(self):
         return self.log_dict
