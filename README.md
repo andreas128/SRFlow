@@ -36,9 +36,9 @@ If you want to install it manually, read the `setup.sh` file. (Links to data/mod
 ```
 source myenv/bin/activate                      # Use the env you created using setup.sh
 cd code
-python test.py ./confs/SRFlow_DF2K_4X.yml      # Diverse Images 4X (Dataset Included)
-python test.py ./confs/SRFlow_DF2K_8X.yml      # Diverse Images 8X (Dataset Included)
-python test.py ./confs/SRFlow_CelebA_8X.yml    # Faces 8X
+CUDA_VISIBLE_DEVICES=-1 python test.py ./confs/SRFlow_DF2K_4X.yml      # Diverse Images 4X (Dataset Included)
+CUDA_VISIBLE_DEVICES=-1 python test.py ./confs/SRFlow_DF2K_8X.yml      # Diverse Images 8X (Dataset Included)
+CUDA_VISIBLE_DEVICES=-1 python test.py ./confs/SRFlow_CelebA_8X.yml    # Faces 8X
 ```
 For testing, we apply SRFlow to the full images on CPU.
 
