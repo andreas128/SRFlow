@@ -1,6 +1,12 @@
 __MACOSX/
 .DS_Store
 
+*.pth
+*.pklv4
+*.zip
+
+datasets/
+
 data/
 myenv/
 .idea

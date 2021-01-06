@@ -1,11 +1,15 @@
 # SRFlow
-## Learning the Super-Resolution Space with Normalizing Flow <br> <sub> [[Paper] ECCV 2020 Spotlight](https://bit.ly/2DkwQcg) </sub>
-<br><br>
+#### Official SRFlow training code: Super-Resolution using Normalizing Flow in PyTorch <br><br>
+#### [[Paper] ECCV 2020 Spotlight](https://bit.ly/2DkwQcg)
+
+<br>
 
 [![SRFlow](https://user-images.githubusercontent.com/11280511/98149322-7ed5c580-1ecd-11eb-8279-f02de9f0df12.gif)](https://bit.ly/3jWFRcr)
-<br><br>
+<br>
+<br>
+<br>
 
-## Setup the Environment and start the Demo
+# Setup: Data, Environment, PyTorch Demo
 
 <br>
 
@@ -25,22 +29,64 @@ This oneliner will:
 
 If you want to install it manually, read the `setup.sh` file. (Links to data/models, pip packages)
 
-## Start the Demo once everything is setup
+<br><br>
+
+# Demo: Try Normalizing Flow in PyTorch
 
 ```bash
 ./run_jupyter.sh
 ```
 
-## Reproduce the SRFlow Results
+This notebook lets you:
+- Load the pretrained models.
+- Super-resolve images.
+- Measure PSNR/SSIM/LPIPS.
+- Infer the Normalizing Flow latent space.
 
-```
+<br><br>
+
+# Testing: Apply the included pretrained models
+
+```bash
 source myenv/bin/activate                      # Use the env you created using setup.sh
 cd code
-python test.py ./confs/SRFlow_DF2K_4X.yml      # Diverse Images 4X (Dataset Included)
-python test.py ./confs/SRFlow_DF2K_8X.yml      # Diverse Images 8X (Dataset Included)
-python test.py ./confs/SRFlow_CelebA_8X.yml    # Faces 8X
+CUDA_VISIBLE_DEVICES=-1 python test.py ./confs/SRFlow_DF2K_4X.yml      # Diverse Images 4X (Dataset Included)
+CUDA_VISIBLE_DEVICES=-1 python test.py ./confs/SRFlow_DF2K_8X.yml      # Diverse Images 8X (Dataset Included)
+CUDA_VISIBLE_DEVICES=-1 python test.py ./confs/SRFlow_CelebA_8X.yml    # Faces 8X
+```
+For testing, we apply SRFlow to the full images on CPU.
+
+<br><br>
+
+# Training: Reproduce or train on your Data
+
+The following commands train the Super-Resolution network using Normalizing Flow in PyTorch:
+
+```bash
+source myenv/bin/activate                      # Use the env you created using setup.sh
+cd code
+python train.py -opt ./confs/SRFlow_DF2K_4X.yml      # Diverse Images 4X (Dataset Included)
+python train.py -opt ./confs/SRFlow_DF2K_8X.yml      # Diverse Images 8X (Dataset Included)
+python train.py -opt ./confs/SRFlow_CelebA_8X.yml    # Faces 8X
 ```
 
+- To reduce the GPU memory, reduce the batch size in the yml file.
+- CelebA does not allow us to host the dataset. A script will follow.
+
+<br><br>
+
+# Dataset: How to train on your own data
+
+The following command creates the pickel files that you can use in the yaml config file:
+
+```bash
+cd code
+python prepare_data.py /path/to/img_dir
+```
+
+The precomputed DF2K dataset gets downloaded using `setup.sh`. You can reproduce it or prepare your own dataset.
+
+<br><br>
 
 # Our paper explains
 
@@ -53,7 +99,9 @@ python test.py ./confs/SRFlow_CelebA_8X.yml    # Faces 8X
 - **See many Visual Results**  <br>
   Compare GAN vs Normalizing Flow yourself. We've included a lot of visuals results in our [[Paper]](https://bit.ly/2D9cN0L).
 
-# Why I stopped using GAN - Blog
+<br><br>
+
+# GAN vs Normalizing Flow - Blog
 
 [![](https://user-images.githubusercontent.com/11280511/98148862-56e66200-1ecd-11eb-817e-87e99dcab6ca.gif)](https://bit.ly/2EdJzhy)
 
@@ -65,12 +113,17 @@ python test.py ./confs/SRFlow_CelebA_8X.yml    # Faces 8X
 Get a quick introduction to Normalizing Flow in our [[Blog]](https://bit.ly/320bAkH).
 <br><br><br>
 
-# Code
+<br><br>
 
-Due to legal hurdles, we are not yet able to release the training code. Hope we can do so soon!
+# Wanna help to improve the code?
 
-We use many components of https://github.com/chaiyujin/glow-pytorch and https://github.com/xinntao/BasicSR.
-Thanks a lot!
+If you found a bug or improved the code, please do the following:
+
+- Fork this repo.
+- Push the changes to your repo.
+- Create a pull request.
+
+<br><br>
 
 # Paper
 [[Paper] ECCV 2020 Spotlight](https://bit.ly/2XcmSks)

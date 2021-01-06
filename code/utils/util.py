@@ -150,8 +150,9 @@ def calculate_psnr(img1, img2):
 def get_resume_paths(opt):
     resume_state_path = None
     resume_model_path = None
-    if opt.get('path', {}).get('resume_state', None) == "auto":
-        wildcard = os.path.join(opt['path']['training_state'], "*")
+    ts = opt_get(opt, ['path', 'training_state'])
+    if opt.get('path', {}).get('resume_state', None) == "auto" and ts is not None:
+        wildcard = os.path.join(ts, "*")
         paths = natsort.natsorted(glob.glob(wildcard))
         if len(paths) > 0:
             resume_state_path = paths[-1]

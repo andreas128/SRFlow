@@ -67,6 +67,7 @@ scipy==1.5.3
 Send2Trash==1.5.0
 six==1.15.0
 terminado==0.9.1
+tensorboard==2.4.0
 testpath==0.4.4
 tifffile==2020.10.1
 torch==1.7.0
