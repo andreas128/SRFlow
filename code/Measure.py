@@ -40,7 +40,7 @@ class Measure():
     def lpips(self, imgA, imgB, model=None):
         tA = t(imgA).to(self.device)
         tB = t(imgB).to(self.device)
-        dist01 = self.model.forward(tA, tB).item()
+        dist01 = self.model.forward(tB, tA).item()
         return dist01
 
     def ssim(self, imgA, imgB):
