@@ -4,6 +4,10 @@
 
 <br>
 
+**News:** Unified Image Super-Resolution and Rescaling [[code](https://bit.ly/2VOKHBb)]
+<br>
+<br>
+
 [![SRFlow](https://user-images.githubusercontent.com/11280511/98149322-7ed5c580-1ecd-11eb-8279-f02de9f0df12.gif)](https://bit.ly/3jWFRcr)
 <br>
 <br>
