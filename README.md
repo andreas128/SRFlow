@@ -28,12 +28,13 @@ This oneliner will:
 - Setup a python3 virtual env
 - Install the packages from `requirements.txt`
 - Download the pretrained models
-- Download the validation data
+- Download the DIV2K validation data
 - Run the Demo Jupyter Notebook
 
 If you want to install it manually, read the `setup.sh` file. (Links to data/models, pip packages)
 
-<br><br>
+<br>
+<br>
 
 # Demo: Try Normalizing Flow in PyTorch
 
@@ -76,6 +77,36 @@ python train.py -opt ./confs/SRFlow_CelebA_8X.yml    # Faces 8X
 
 - To reduce the GPU memory, reduce the batch size in the yml file.
 - CelebA does not allow us to host the dataset. A script will follow.
+
+### How to prepare CelebA?
+
+**1. Get HD-CelebA-Cropper**
+
+```git clone https://github.com/LynnHo/HD-CelebA-Cropper```
+
+**2. Download the dataset**
+
+`img_celeba.7z` and `annotations.zip` as desribed in the [Readme](https://github.com/LynnHo/HD-CelebA-Cropper).
+
+**3. Run the crop align**
+
+```python3 align.py --img_dir ./data/data --crop_size_h 640 --crop_size_w 640 --order 3 --face_factor 0.6 --n_worker 8```
+
+**4. Downsample for GT**
+
+ Use the [matlablike kernel](https://github.com/fatheral/matlab_imresize) to downscale to 160x160 for the GT images.
+
+**5. Downsample for LR**
+
+Downscale the GT using the Matlab kernel to the LR size (40x40 or 20x20)
+
+**6. Train/Validation**
+
+For training and validation, we use the corresponding sets defined by CelebA (Train: 000001-162770, Validation: 162771-182637)
+
+**7. Pack to pickle for training**
+
+`cd code && python prepare_data.py /path/to/img_dir`
 
 <br><br>
 
