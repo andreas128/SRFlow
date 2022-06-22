@@ -39,7 +39,7 @@ nbformat==5.0.8
 nest-asyncio==1.4.2
 networkx==2.5
 notebook==6.1.4
-numpy==1.19.4
+numpy==1.22.0
 opencv-python==4.4.0.46
 packaging==20.4
 pandas==1.1.4
