@@ -31,7 +31,7 @@ kiwisolver==1.3.1
 lpips==0.1.3
 MarkupSafe==1.1.1
 matplotlib==3.3.2
-mistune==0.8.4
+mistune==2.0.3
 natsort==7.0.1
 nbclient==0.5.1
 nbconvert==6.0.7
